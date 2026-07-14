@@ -73,7 +73,7 @@ class MessageDatabase:
     
     @mutex(lock=datalock)
     def add(self, m: MessageData) -> None:
-        self.heap.append((m.expiry, m.message_id))
+        heapq.heappush(self.heap, (m.expiry, m.message_id))
         self.data[m.message_id] = m
         self.clean()
     
